@@ -1,0 +1,25 @@
+id: Elasticsearch
+name: Elasticsearch
+version: 0.01
+author_name: Masahiro Iuchi
+author_link: https://github.com/masiuchi
+plugin_link: https://github.com/masiuchi/mt-plugin-elasticsearch
+description: <__trans phrase="Use Elasticsearch in mt-search.cgi.">
+
+system_config_template: system_config.tmpl
+
+settings:
+    server:
+        Default: 'localhost:9200'
+    index:
+        Default: mt
+
+callbacks:
+    init_app: $Elasticsearch::MT::Elasticsearch::Callback::init_app
+
+    MT::Entry::post_save: $Elasticsearch::MT::Elasticsearch::Callback::post_save
+    MT::Page::post_save: $Elasticsearch::MT::Elasticsearch::Callback::post_save
+
+    MT::Entry::post_remove: $Elasticsearch::MT::Elasticsearch::Callback::post_remove
+    MT::Page::post_remove: $Elasticsearch::MT::Elasticsearch::Callback::post_remove
+
